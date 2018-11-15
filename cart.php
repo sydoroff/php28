@@ -42,34 +42,55 @@ class Cart
     private $Shipment = array ();
     private $discount = array();
 
+    /**
+     * Cart constructor.
+     * Запоминаем время создания корзины.
+     */
     function  __construct()
     {
         $this->CreateDate= new DateTime( 'now',  new \DateTimeZone( 'GMT+2' ) );
     }
 
+    /**
+     * Добавляем в корзину
+     * @param $item - array
+     * @param null $id - передаем номер товара
+     * @param int $count - количество товара
+     */
     function addProduct($item,$id = NULL, int $count =  1)
     {
         if(!array_key_exists($id,$this->Shipment)){
-        $item['add'] = new DateTime( 'now',  new \DateTimeZone( 'GMT+2' ) );
-        $item['count'] = $count;
-        $item['total'] = $count*$item['price'];
-        $this->Shipment[$id] = $item;}
+            $this->Shipment[$id] = $item;
+            $item['add'] = new DateTime( 'now',  new \DateTimeZone( 'GMT+2' ) );
+            $item['count'] = $count;
+            $item['total'] = $count*$item['price'];}
     }
 
+    /**
+     * Устанавливаем скидку
+     * @param $type - скидки стринг: 'count' - начисление скидки в зависимости от количества товара
+     * или 'price' -начисление скидки в зависимости от общей суммы
+     * @param $total - количество на которое начисляется скидка
+     * @param $rate - процент скидки, целое число (7% - 7)
+     */
     function setDiscount($type,$total,$rate){
         $this->discount[$type]=['total'=>$total,'rate'=>$rate];
     }
 
-
+    /**
+     * Расчитываем и получаем применяемую скидку
+     * @param string $type - тип вывода функции: 'rate' - сумма скидки, 'proc' - процент применяемой скидки
+     * @return float|int
+     */
     function getDiscount($type = 'rate')
     {
         $rate=0;
         $proc=0;
-        if ($this->discount['price']['total']<$this->totalPrice(FALSE))
+        if ($this->discount['price']['total'] < $this->totalPrice(FALSE))
         { $rate =$this->totalPrice(FALSE)*$this->discount['price']['rate']/100;
           $proc = $this->discount['price']['rate'];
         }
-        if ($this->discount['count']['total']<$this->totalCount())
+        if ($this->discount['count']['total'] < $this->totalCount())
             {$rate = $this->totalPrice(FALSE)*$this->discount['count']['rate']/100;
              $proc = $this->discount['count']['rate'];
             }
@@ -77,15 +98,23 @@ class Cart
         else return $proc;
     }
 
+    /**
+     * Количество единиц товара в корзине
+     * @return int
+     */
     function totalCount(){
         $totalCount = 0;
         foreach ($this->Shipment as $item) $totalCount+=$item['count'];
         return $totalCount;
     }
 
+    /**
+     * Сумма стоимости товаров в корзине
+     * @param bool $discount - применение скидки
+     * @return float|int
+     */
     function totalPrice($discount = TRUE)
     {
-        $totalCount = 0;
         $totalPrice = 0;
         $rate = 0;
         foreach ($this->Shipment as $item)
@@ -96,21 +125,37 @@ class Cart
         return ($totalPrice - $rate);
     }
 
+    /**
+     * Удаление единицы товара из корзины
+     * @param $id - товара
+     */
     function  delProduct($id)
     {
         unset($this->Shipment[$id]);
     }
 
+    /**
+     * Количество наименований товара
+     * @return int
+     */
     function count()
     {
         return count($this->Shipment);
     }
 
+    /**
+     * Получение даты создания корзины
+     * @return string
+     */
     function getCreateDate()
     {
         return $this->CreateDate->format('Y-m-d H:i:s');
     }
 
+    /**
+     * Вывод всех товаров находящихся в корзине ввиде массива
+     * @return array
+     */
     function fetch()
     {
         return $this->Shipment;
