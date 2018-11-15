@@ -60,10 +60,10 @@ class Cart
     function addProduct($item,$id = NULL, int $count =  1)
     {
         if(!array_key_exists($id,$this->Shipment)){
-            $this->Shipment[$id] = $item;
             $item['add'] = new DateTime( 'now',  new \DateTimeZone( 'GMT+2' ) );
             $item['count'] = $count;
-            $item['total'] = $count*$item['price'];}
+            $item['total'] = $count*$item['price'];
+            $this->Shipment[$id] = $item;}
     }
 
     /**
