@@ -20,6 +20,7 @@ require_once ('./cart.php');
     <input type="submit" value="Add to cart">
 </form>
 <?
+
 if ($cart!=NULL)
 {
     include ('./list.php');

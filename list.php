@@ -1,6 +1,6 @@
 <ul>
     <?
-    foreach ($cart->fetch() as $key => $item)
+    foreach ($cart->getItems() as $key => $item)
         echo "<li><span>
             <form method='post' action='cart.php?action=delete'>
             ".$item['name']." (".$item['price'].") Count: ".$item['count'].". subTotal: ".$item['total'].". 
@@ -10,4 +10,4 @@
 
     ?>
 </ul>
-Rate: <?=$cart->getDiscount();?> Discaunt: <?=$cart->getDiscount('proc');?>% Total: <?=$cart->totalPrice();?>
+Rate: <?=$cart->getDiscount();?> Discaunt: <?=$cart->getDiscount('proc');?>% Total: <?=$cart->getSum();?>
