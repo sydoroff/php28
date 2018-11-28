@@ -74,7 +74,7 @@ class CartClass
      */
     function getDiscount($type = 'rate')
     {
-        if ($type=='rate') return $this->discount;
+        if ($type=='rate') return $this->discount->getDiscount();
         else return $this->discount->getPercent();
     }
 

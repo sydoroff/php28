@@ -32,7 +32,7 @@ switch ($_GET["action"]){
         $cart->delProduct($_POST['product']);
         break;
 }
-if (strpos($_SERVER["SCRIPT_NAME"],'cart.php')>0) header("Location:index.php");
+if (strpos($_SERVER["SCRIPT_NAME"],'act.php')>0) header("Location:index.php");
 
 
 

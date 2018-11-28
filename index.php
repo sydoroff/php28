@@ -6,10 +6,11 @@
  * Time: 22:04
  */
 
-require_once ('./cart.php');
+require_once ('./act.php');
+require_once ('./User.php');
 
 ?>
-<form action="cart.php?action=add" method="post">
+<form action="act.php?action=add" method="post">
     <select name="product">
         <?php
             foreach ($products as $row => $item)
@@ -25,4 +26,8 @@ if ($cart!=NULL)
 {
     include ('./list.php');
 }
+echo "<br/>";
+$user = new UserRun();
+$user->view();
+
 ?>
