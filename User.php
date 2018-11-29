@@ -6,15 +6,11 @@
  * Time: 21:48
  */
 
-class User
+abstract class User
 {
     private $user;
     private $error;
     private $url;
-    private $users = [
-        ['id'=>1,'name'=>'Василий', 'surname'=>'Петров', 'email'=>'vasya-petya@gmail.com', 'password'=>'12345'],
-        ['id'=>2,'name'=>'Василий', 'surname'=>'Пупкин', 'email'=>'vasya-naibator@gmail.com', 'password'=>'123456']
-    ];
 
     function __construct($url = 'auth.php')
     {
@@ -40,23 +36,20 @@ class User
 
     function auth($user,$pass)
     {
-        if($arr=array_filter($this->users,function ($arr) use ($user,$pass) { return $arr['email']===$user&&$arr['password'] === $pass; } )) {
+        include ('array');
+        if($arr=array_filter($users, function ($arr) use ($user,$pass) { return $arr['email']===$user&&$arr['password'] === $pass;} )) {
             $this->error=NULL;
             return $this->user = $arr[0];
         }
-        else
-        {
+        else {
             $this->error++;
             return FALSE;
         }
     }
+
     function getUserFill($id)
     {
-        if ($this->isAuth())
-        {
-            return $this->user[$id];
-        }
-        else return FALSE;
+        return $this->user[$id];
     }
 
     function getUrl()
@@ -75,17 +68,17 @@ class UserRun extends User
 {
     function run($email,$passwd,$act)
     {
-        if ($this->isAuth())
-        {if($act='logout') $this->logOut();
+        if ($this->isAuth()&&$act=='logout'){
+            $this->logOut();
             header("Location:index.php");
         }
-        else
-            switch ($act){
-                case 'login':
-                    if ($this->auth($email,$passwd)) header("Location:index.php");
-                default:
-                    $this->showLoginForm();
-            }
+        elseif ($act=='login'){
+            if ($this->auth($email,$passwd)) header("Location:index.php");
+            else header("Location:".$_SERVER['PHP_SELF']);
+        }
+        else{
+            $this->showLoginForm();
+        }
     }
 
     function view()
