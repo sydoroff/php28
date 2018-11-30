@@ -68,48 +68,37 @@ class UserRun extends User
 {
     function run($email,$passwd,$act)
     {
+        $answer['error'] = 'Неизвесная ошибка!';
         if ($this->isAuth()&&$act=='logout'){
             $this->logOut();
-            header("Location:index.php");
+            unset($answer['error']);
+            $answer['txt'] = 'Заходите еще!';
         }
-        elseif ($act=='login'){
-            if ($this->auth($email,$passwd)) header("Location:index.php");
-            else header("Location:".$_SERVER['PHP_SELF']);
+        elseif (!$this->isAuth()&&$act=='login'){
+            if ($this->auth($email,$passwd)) {
+                $answer['name'] = $this->getUserFill('name');
+                unset($answer['error']);
+            }
+            else $answer['error']='Ошибка аутентификации!';
         }
-        else{
-            $this->showLoginForm();
-        }
+       echo json_encode($answer);
     }
 
     function view()
     {
+        ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="/mod_win.js"></script>
+        <?
         if ($this->isAuth())
         {
             echo "<p>Привет: ".$this->getUserFill('name')." ".$this->getUserFill('surname');
-            echo " <a href='".$this->getUrl()."?action=logout'>Выйти</a></p>";
+            echo " <a href='#' onclick='user_logout(this)'>Выйти</a></p>";
         }
         else
         {
-            echo "<a href='".$this->getUrl()."'>Войти</a>";
+            echo "<a href='#' onclick=\"show_win();return false;\">Войти</a>";
+            echo file_get_contents('form_login.skin');
         }
-    }
-
-    function showLoginForm()
-    {
-        if ($this->getError()) echo"<h4>Ошибка ввода логина и пароля!!!</h4>";
-        ?>
-        <form action="<?=$this->getUrl()?>?action=login" method="post">
-            <table>
-                <tr>
-                    <td>E-mail:</td><td><input type="email" name="email" value="<?=$_POST['email']?>"></td>
-                </tr>
-                <tr>
-                    <td>Password:</td><td><input type="password" name="passwd"></td>
-                </tr>
-            </table>
-            <div class="g-recaptcha" data-sitekey="6LcloH0UAAAAAF-hHqHAHoL16dMuzZq6yxWd6iuD"></div>
-            <input type="submit" value="Войти">
-        </form>
-        <?
     }
 }

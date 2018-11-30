@@ -10,6 +10,11 @@ require_once ('./act.php');
 require_once ('./User.php');
 
 ?>
+<html>
+<head>
+
+</head>
+<body>
 <form action="act.php?action=add" method="post">
     <select name="product">
         <?php
@@ -20,6 +25,7 @@ require_once ('./User.php');
     Count: <input type="text" name="count" maxlength="3" value="1">
     <input type="submit" value="Add to cart">
 </form>
+
 <?
 
 if ($cart!=NULL)
@@ -29,5 +35,6 @@ if ($cart!=NULL)
 echo "<br/>";
 $user = new UserRun();
 $user->view();
-
 ?>
+</body>
+</html>
