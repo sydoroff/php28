@@ -1,0 +1,9 @@
+<?
+$users = [
+        ['id'=>1,'name'=>'Юзер', 'surname'=>'Пет', 'email'=>'user@g.co', 'password'=>'111','role'=>'1'],
+        ['id'=>2,'name'=>'Админ', 'surname'=>'Петров', 'email'=>'admin@g.co', 'password'=>'111','role'=>'2'],
+        ['id'=>3,'name'=>'Менеджер Продаж', 'surname'=>'Пупкин', 'email'=>'m-sales@g.co', 'password'=>'111','role'=>'3'],
+        ['id'=>4,'name'=>'Контент Менджер', 'surname'=>'Петров', 'email'=>'m-content@g.co', 'password'=>'111','role'=>'4'],
+        ['id'=>5,'name'=>'Менджер Склада', 'surname'=>'Петров', 'email'=>'m-stock@g.co', 'password'=>'111','role'=>'5']
+        ];
+?>
