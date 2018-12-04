@@ -34,7 +34,7 @@ if ($cart!=NULL)
 }
 echo "<br/>";
 $user = new UserRun();
-$user->view();
+echo $user->view();
 
 ?>
 <br/><br/><a href="edit_product.php">Edit catalog</a>

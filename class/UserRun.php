@@ -30,19 +30,18 @@ class UserRun extends User
 
     function view()
     {
-        ?>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="/js/mod_win.js"></script>
-        <?
+        $text = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>';
+        $text.= '<script src="/js/mod_win.js"></script>';
         if ($this->isAuth())
         {
-            echo "<p>Привет: ".$this->getUserFill('name')." ".$this->getUserFill('surname');
-            echo " <a href='#' onclick='user_logout(this)'>Выйти</a></p>";
+            $text.= "<p>Привет: ".$this->getUserFill('name')." ".$this->getUserFill('surname');
+            $text.= " <a href='#' onclick='user_logout(this)'>Выйти</a></p>";
         }
         else
         {
-            echo "<a href='#' onclick=\"show_win();return false;\">Войти</a>";
-            echo file_get_contents('form_login.skin');
+            $text.= "<a href='#' onclick=\"show_win();return false;\">Войти</a>";
+            $text.= file_get_contents('form_login.skin');
         }
+        return $text;
     }
 }

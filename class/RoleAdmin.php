@@ -8,24 +8,21 @@
 
 require_once ('UserInterface.php');
 
+
 class RoleAdmin implements UserInterface
 {
     function  productEdit($products,$cell){
         switch ($cell){
             case 'name':
-                echo "<input type=\"text\" name=\"name\" value=\"{$products[$cell]}\" required>";
-               break;
+                return "<input type=\"text\" name=\"name\" value=\"{$products[$cell]}\" required>";
             case 'txt':
-                echo "<input type=\"text\" name=\"txt\" value=\"{$products[$cell]}\">";
-                break;
+                return "<input type=\"text\" name=\"txt\" value=\"{$products[$cell]}\">";
             case 'count':
-                echo "<input type=\"number\" name=\"count\" value=\"{$products[$cell]}\" required>";
-                break;
+                return "<input type=\"number\" name=\"count\" value=\"{$products[$cell]}\" required>";
             case 'price':
-                echo "<input type=\"text\" name=\"price\" value=\"{$products[$cell]}\" required>";
-                break;
+                return "<input type=\"text\" name=\"price\" value=\"{$products[$cell]}\" required>";
             default:
-                echo $products[$cell];
+                return $products[$cell];
         }
     }
     function productEditPost($product,$post){
