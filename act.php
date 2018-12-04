@@ -6,18 +6,19 @@
  * Time: 20:42
  */
 //=========================INIT=======================================//
-require_once("./CartClass.php");
+require_once("./class/CartClass.php");
 session_start();
 const SES_VAL_NAME = 'cart';
 $cart = $_SESSION[SES_VAL_NAME];
 
-$products = [
-    2=>['name'=>'товар 1', 'price'=>233],
-    7=>['name'=>'товар 2', 'price'=>333],
-    8=>['name'=>'товар 4', 'price'=>133],
-    9=>['name'=>'товар 5', 'price'=>138],
-    43=>['name'=>'товар 3', 'price'=>332],
-];
+const USER = 1;
+const ADMIN = 2;
+const M_SALES= 3;
+const M_CONTENT = 4;
+const M_STOCK =5;
+
+$products=file_get_contents('product');
+$products=unserialize($products);
 
 //=========================GET=======================================//
 switch ($_GET["action"]){

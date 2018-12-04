@@ -1,6 +1,0 @@
-<?
-$users = [
-        ['id'=>1,'name'=>'Василий1', 'surname'=>'Петров', 'email'=>'vasya-petya@gmail.com', 'password'=>'12345','role'=>'admin'],
-        ['id'=>2,'name'=>'Василий2', 'surname'=>'Пупкин', 'email'=>'vasya-naibator@gmail.com', 'password'=>'123456','role'=>'xyu']
-        ];
-?>

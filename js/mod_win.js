@@ -15,8 +15,10 @@ function close_win(){
             }
         );
 }
-function form_submit(param){
-        var form = $(param.parentNode);
+$(document).ready(function(){
+    $('#modal_forms').submit(function(e){
+        e.preventDefault();
+            var form = $(this);
             var data = form.serialize();
             $.ajax({
                 type: 'POST',
@@ -31,7 +33,6 @@ function form_submit(param){
                         alert(data['error']);
                     } else {
                         alert('Привет '+data["name"]+'!');
-                        form.submit();
                         location.reload();
                     }
                 },
@@ -43,8 +44,9 @@ function form_submit(param){
                     form.find('input[type="submit"]').prop('disabled', false);
                 }
             });
-        return false;
-    }
+            return false;
+    })
+})
 function user_logout(param){
     var butt = $(param);
     $.ajax({

@@ -7,7 +7,7 @@
  */
 
 require_once ('./act.php');
-require_once ('./User.php');
+require_once ('./class/UserRun.php');
 
 ?>
 <html>
@@ -35,6 +35,9 @@ if ($cart!=NULL)
 echo "<br/>";
 $user = new UserRun();
 $user->view();
+
 ?>
+<br/><br/><a href="edit_product.php">Edit catalog</a>
+
 </body>
 </html>

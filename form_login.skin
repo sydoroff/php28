@@ -1,7 +1,7 @@
-<style> @import "mod_win.css"; </style>
+<style> @import "/css/mod_win.css"; </style>
 <div id="modal_form">
     <span id="modal_close" onclick="close_win()">X</span>
-    <form action="#">
+    <form action="#" id="modal_forms">
         <table>
             <tr>
                 <td>E-mail:</td><td><input type="email" name="email" required></td>
@@ -10,7 +10,7 @@
                 <td>Password:</td><td><input type="password" name="passwd" required></td>
             </tr>
         </table>
-        <input type="submit" value="Войти" onclick="form_submit(this)">
+        <input type="submit" value="Войти">
     </form>
 </div>
 <div id="overlay"></div>
