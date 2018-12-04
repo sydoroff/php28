@@ -8,6 +8,7 @@
 
 require_once ('UserInterface.php');
 
+
 class RoleM_Sales implements UserInterface
 {
     function  productEdit($products,$cell){
