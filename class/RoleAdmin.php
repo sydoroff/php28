@@ -11,18 +11,9 @@ require_once ('UserInterface.php');
 
 class RoleAdmin implements UserInterface
 {
+    private $edited = self::ROLE_ADMIN;
+    use role;
 
-    function isProductEdited($cell){
-        switch ($cell){
-            case 'name':
-            case 'txt':
-            case 'count':
-            case 'price':
-                return true;
-            default: return false;
-
-        }
-    }
     function productEdit($product,$post){
         return ['name' => htmlspecialchars($post['name']),
             'txt' => htmlspecialchars($post['txt']),
