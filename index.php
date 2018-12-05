@@ -7,7 +7,7 @@
  */
 
 require_once ('./act.php');
-require_once ('./class/UserRun.php');
+require_once ('./class/UserController.php');
 
 ?>
 <html>
@@ -33,7 +33,7 @@ if ($cart!=NULL)
     include ('./list.php');
 }
 echo "<br/>";
-$user = new UserRun();
+$user = new UserController();
 echo $user->view();
 
 ?>

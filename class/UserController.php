@@ -8,9 +8,9 @@
 
 require_once ('User.php');
 
-class UserRun extends User
+class UserController extends User
 {
-    function run($email,$passwd,$act)
+    function response($email,$passwd,$act)
     {
         $answer['error'] = 'Неизвесная ошибка!';
         if ($this->isAuth()&&$act=='logout'){

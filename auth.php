@@ -6,7 +6,7 @@
  * Time: 0:29
  */
 session_start();
-require_once ('./class/UserRun.php');
-$user = new UserRun();
-$user->run($_POST['email'],$_POST['passwd'],$_GET['action']);
+require_once ('./class/UserController.php');
+$user = new UserController();
+$user->response($_POST['email'],$_POST['passwd'],$_GET['action']);
 
