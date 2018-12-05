@@ -11,15 +11,8 @@ require_once ('UserInterface.php');
 
 class RoleM_Stock implements UserInterface
 {
-
-    function isProductEdited($cell){
-        switch ($cell){
-            case 'count':
-                return true;
-            default: return false;
-
-        }
-    }
+    private $edited = self::ROLE_M_STOCK;
+    use role;
 
     function productEdit($product,$post){
         $product['count']= htmlspecialchars($post['count']);

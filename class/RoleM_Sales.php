@@ -11,14 +11,8 @@ require_once ('UserInterface.php');
 
 class RoleM_Sales implements UserInterface
 {
-
-    function isProductEdited($cell){
-        switch ($cell){
-            case 'price':
-                return true;
-            default: return false;
-        }
-    }
+    private $edited = self::ROLE_M_SALES;
+    use role;
 
     function productEdit($product,$post){
         $product['price']= htmlspecialchars($post['price']);
