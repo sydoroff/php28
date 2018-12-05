@@ -11,15 +11,17 @@ require_once ('UserInterface.php');
 
 class RoleM_Stock implements UserInterface
 {
-    function  productEdit($products,$cell){
+
+    function isProductEdited($cell){
         switch ($cell){
             case 'count':
-                return "<input type=\"number\" name=\"count\" value=\"{$products[$cell]}\" required>";
-            default:
-                return $products[$cell];
+                return true;
+            default: return false;
+
         }
     }
-    function productEditPost($product,$post){
+
+    function productEdit($product,$post){
         $product['count']= htmlspecialchars($post['count']);
         return $product;
     }

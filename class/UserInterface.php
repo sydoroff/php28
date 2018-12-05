@@ -7,8 +7,8 @@
  */
 interface UserInterface
 {
-    function productEdit($products,$cell);
-    function productEditPost($product,$post);
+    function isProductEdited($cell);
+    function productEdit($product,$post);
 }
 
 

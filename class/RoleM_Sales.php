@@ -11,15 +11,16 @@ require_once ('UserInterface.php');
 
 class RoleM_Sales implements UserInterface
 {
-    function  productEdit($products,$cell){
+
+    function isProductEdited($cell){
         switch ($cell){
             case 'price':
-                return "<input type=\"text\" name=\"price\" value=\"{$products[$cell]}\" required>";
-            default:
-                return $products[$cell];
+                return true;
+            default: return false;
         }
     }
-    function productEditPost($product,$post){
+
+    function productEdit($product,$post){
         $product['price']= htmlspecialchars($post['price']);
         return $product;
     }

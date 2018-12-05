@@ -30,7 +30,8 @@ if (!$user->isAuth()||$user->getUserFill('role')==USER){
 
 if ($user->getUserFill('role')==ADMIN) {
     $role = new RoleAdmin();
-    $admin_delete = "<a href='edit_product.php?action=delete&id=".$_GET['id']."' onclick='if(!confirm(\"Do you want delete this product?\")) return false;'>Delete</a>";
+    $admin_delete = "<a href='edit_product.php?action=delete&id=".$_GET['id']."' 
+                        onclick='if(!confirm(\"Do you want delete this product?\")) return false;'>Delete</a>";
     $admin_add = "<a href='edit_product.php?action=add'>Add product</a>";
 }
 elseif ($user->getUserFill('role')==M_SALES) $role = new RoleM_Sales();
@@ -67,27 +68,31 @@ switch ($_GET['action']){
             exit;
         }
         break;
-    case 'push':
-        $products[$_GET['id']]=$role->productEditPost($products[$_GET['id']],$_POST);
+    case 'edit_push':
+        $products[$_GET['id']]=$role->productEdit($products[$_GET['id']],$_POST);
         $products=serialize($products);
         file_put_contents('product',$products);
         header('Location: /edit_product.php');
         break;
     case 'edit':
         ?>
-        <form action="edit_product.php?action=push&id=<?=$_GET['id']?>" method="post">
+        <form action="edit_product.php?action=edit_push&id=<?=$_GET['id']?>" method="post">
             <table>
                 <tr>
-                    <td>Name:</td><td><?=$role->productEdit($products[$_GET['id']],'name')?></td>
+                    <td>Name:</td><td><input type="text" name="name" value="<?=$products[$_GET['id']]['name']?>"
+                            <?=$role->isProductEdited('name')? "required":"disabled"?>></td>
                 </tr>
                 <tr>
-                    <td>About:</td><td><?=$role->productEdit($products[$_GET['id']],'txt')?></td>
+                    <td>About:</td><td><input type="text" name="txt" value="<?=$products[$_GET['id']]['txt']?>"
+                            <?=$role->isProductEdited('txt')? "required":"disabled"?>></td>
                 </tr>
                 <tr>
-                    <td>Count:</td><td><?=$role->productEdit($products[$_GET['id']],'count')?></td>
+                    <td>Count:</td><td><input type="number" name="count" value="<?=$products[$_GET['id']]['count']?>"
+                            <?=$role->isProductEdited('count')? "required":"disabled"?>></td>
                 </tr>
                 <tr>
-                    <td>Price:</td><td><?=$role->productEdit($products[$_GET['id']],'price')?></td>
+                    <td>Price:</td><td><input type="text" name="price" value="<?=$products[$_GET['id']]['price']?>"
+                            <?=$role->isProductEdited('price')? "required":"disabled"?>></td>
                 </tr>
             </table>
             <input type="submit">&nbsp;<input type="button" value="Exit" onclick="window.location='/edit_product.php';">
