@@ -1,5 +1,5 @@
 <?
-$users = [
+ return [
         ['id'=>1,'name'=>'Юзер', 'surname'=>'Пет', 'email'=>'user@g.co', 'password'=>'111','role'=>'1'],
         ['id'=>2,'name'=>'Админ', 'surname'=>'Петров', 'email'=>'admin@g.co', 'password'=>'111','role'=>'2'],
         ['id'=>3,'name'=>'Менеджер Продаж', 'surname'=>'Пупкин', 'email'=>'m-sales@g.co', 'password'=>'111','role'=>'3'],

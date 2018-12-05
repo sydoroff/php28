@@ -11,17 +11,17 @@ require_once ('UserInterface.php');
 
 class RoleM_Content implements UserInterface
 {
-    function  productEdit($products,$cell){
+    function isProductEdited($cell){
         switch ($cell){
             case 'name':
-                return "<input type=\"text\" name=\"name\" value=\"{$products[$cell]}\" required>";
             case 'txt':
-                return "<input type=\"text\" name=\"txt\" value=\"{$products[$cell]}\">";
-            default:
-                return $products[$cell];
+                return true;
+            default: return false;
+
         }
     }
-    function productEditPost($product,$post){
+
+    function productEdit($product,$post){
         $product['name']= htmlspecialchars($post['name']);
         $product['txt']= htmlspecialchars($post['txt']);
         return $product;

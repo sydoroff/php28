@@ -36,7 +36,7 @@ class User
 
     function auth($user,$pass)
     {
-        include ('users');
+        $users = include ('users');
         if($arr=array_filter($users, function ($arr) use ($user,$pass) { return $arr['email']===$user&&$arr['password'] === $pass;} )) {
             $this->error=NULL;
             reset($arr);

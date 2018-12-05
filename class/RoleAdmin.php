@@ -11,21 +11,19 @@ require_once ('UserInterface.php');
 
 class RoleAdmin implements UserInterface
 {
-    function  productEdit($products,$cell){
+
+    function isProductEdited($cell){
         switch ($cell){
             case 'name':
-                return "<input type=\"text\" name=\"name\" value=\"{$products[$cell]}\" required>";
             case 'txt':
-                return "<input type=\"text\" name=\"txt\" value=\"{$products[$cell]}\">";
             case 'count':
-                return "<input type=\"number\" name=\"count\" value=\"{$products[$cell]}\" required>";
             case 'price':
-                return "<input type=\"text\" name=\"price\" value=\"{$products[$cell]}\" required>";
-            default:
-                return $products[$cell];
+                return true;
+            default: return false;
+
         }
     }
-    function productEditPost($product,$post){
+    function productEdit($product,$post){
         return ['name' => htmlspecialchars($post['name']),
             'txt' => htmlspecialchars($post['txt']),
             'count' => htmlspecialchars($post['count']),
